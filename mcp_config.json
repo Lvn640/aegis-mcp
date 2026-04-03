@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "aegis-firewall": {
+      "command": "python",
+      "args": ["aegis_mcp_adapter.py"],
+      "env": {
+        "AEGIS_ENDPOINT": "http://127.0.0.1:8000/agent/execute-high-stakes"
+      }
+    }
+  }
+}
+
