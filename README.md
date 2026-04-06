@@ -19,7 +19,20 @@ Traditional AI agents break when forced into browser-based OAuth redirects. Aegi
 - **Identity:** Auth0 CIBA, Token Vault, Management API
 - **Agent:** OpenClaw / MCP (Model Context Protocol)
 
-## 🛠️ Setup & Demo
+## 🛠️ Local Development Setup
+
+### Backend Setup
+1. **Clone the Repo:** `git clone https://github.com/Lvn640/aegis-mcp.git`
+2. **Install Dependencies:** `pip install -r requirements.txt`
+3. **Configure Environment:** 
+   - Copy `server/.env.example` to `server/.env`.
+   - Fill in your Auth0 credentials and `TARGET_USER_ID`.
+4. **Run the Server:** 
+   ```bash
+   uvicorn server.main:app --host 0.0.0.0 --port 8000
+   ```
+
+### 🛠️ Setup & Demo
 1. **Prime the Vault:** Access `/login` to link your GitHub/Stripe accounts to the Auth0 Cloud Vault.
 2. **Launch Console:** Start the React frontend and type `simulate`.
 3. **Approve:** Receive the Auth0 Guardian push notification on your mobile.
