@@ -8,8 +8,19 @@ from dotenv import load_dotenv
 from jose import jwt
 from urllib.request import urlopen
 
+from fastapi.middleware.cors import CORSMiddleware
+
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 app = FastAPI(title="Aegis-MCP Sovereign Enclave")
+
+# --- CORS ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- CONFIG ---
 AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
