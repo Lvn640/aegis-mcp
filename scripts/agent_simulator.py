@@ -6,29 +6,27 @@ def open_claw_task():
     print("\n" + "="*40)
     print("[OpenClaw] Goal: Pay for server hosting via Stripe.")
     print("[OpenClaw] Requesting biometric approval via Aegis-MCP...")
-    
-    url = "http://127.0.0.1:8000/agent/execute-high-stakes"
-    
-    # Use the same token from your last successful run
-    token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlNoYVFucDRhN21ydWhSNUNUTGpVMCJ9.eyJpc3MiOiJodHRwczovL2Rldi1vZW0yYmk0OGt6ZjhuczJyLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJCM2NVRTltQUF6NWJRclhOQjVkUnpJNzRBUlo0dUgxTkBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9hcGkuYWVnaXMubG9jYWwiLCJpYXQiOjE3NzUxOTYwMjEsImV4cCI6MTc3NTI4MjQyMSwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwiYXpwIjoiQjNjVUU5bUFBejViUXJYTkI1ZFJ6STc0QVJaNHVIMU4ifQ.jsJ3cIF7fjtsxbzO26ln-4ZX8a-046-WX6z-YDZfqSNabQqxXA9uxNamnYeh_XuEH_ZOyTvDMnLSUJ1mnIBBe8r3x253ABuYIf2PdHI0XrW2T6Y68qENYjo_5Og0Jl7IJqgOaO3drmAgjsbscXyGG5Z5tysz-q-ahd4HRGlxTAjnZmCLjokWS1JvtAENNroWvc-BDTPx33BFzI-Z_WmNeGQJZ4kXXRUewLGmuR-UwUXLcJKPb3jPymGcGeIQJ1_x3ZD4LDd-lglZ4QPkw8g5NZjtMln-kjFf3eRF6m2y7hoi1jVrDHwd78tWz4iFRBF-0-5-v_hW5Szeoo2FxM52dA"
+
+    url = "http://127.0.0.1:8001/agent/execute-high-stakes"
+
+    # FRESH TOKEN (Issued April 4, 2026)
+    token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlNoYVFucDRhN21ydWhSNUNUTGpVMCJ9.eyJpc3MiOiJodHRwczovL2Rldi1vZW0yYmk0OGt6ZjhuczJyLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJ2ZWhuZ3NodTRhbFZwd3NORFhqNkdlTDg3NlJyR3lvSEBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9hcGkuYWVnaXMubG9jYWwiLCJpYXQiOjE3NzUzMjIxOTUsImV4cCI6MTc3NTQwODU5NSwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwiYXpwIjoidmVobmdzaHU0YWxWcHdzTkRYajZHZUw4NzZSckd5b0gifQ.GRjUEmSxDqw2LQHk9E1zLAxa6vhR72KtlrqC16TRa9G6--yY1NFMEVH45rk03BZIjUhSZ43E8AxLT8ORPU_55r4EYpBQJ8SNajWyQ4prDG0cxsxGCL0XB74RS4Bmo-myJdqWJPxNaYwrHNknzczIDyagvGcBMnws1D3dFfKro4NaIjsIDDwYaPo5vCFmiBLpiiGqpsJl4bRiaXGpdDqHUn8HszXa1RJLlHW3UZgRvwCqQwS33NJtmXZ3WFzSTXMoAR_ZxOICWqFeLtV5afPL4f92v8wSwDOlnJk1zptzB4gPWj_8WOLNpLcK54vmbGz-q_hBzyuFzznLnGIPnXMydg"
 
     headers = {"Authorization": f"Bearer {token}"}
-    
+
     try:
         # Long timeout to allow you time to approve on your phone
         response = requests.post(url, headers=headers, timeout=120)
-        
+
         if response.status_code == 200:
             result = response.json()
-            # --- THE FIX IS HERE ---
             print(f"[OpenClaw] Access GRANTED. Status: {result['status']}")
             print(f"[OpenClaw] Vault Security: {'ACTIVE' if result.get('vault_key_active') else 'INACTIVE'}")
             print("[OpenClaw] Task Complete. Keys have been flushed from memory.")
-            # -----------------------
             print("="*40 + "\n")
         else:
             print(f"[OpenClaw] Access DENIED: {response.text}")
-            
+
     except Exception as e:
         print(f"[OpenClaw] Logic Error: {e}")
 

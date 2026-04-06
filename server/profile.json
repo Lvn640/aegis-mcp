@@ -1,0 +1,6 @@
+{
+  "name": "Aegis-GitHub-Vault",
+  "type": "custom_authentication",
+  "action_id": "e3bb3a8c-409f-45d1-a53f-5db78ae6ee19",
+  "subject_token_type": "urn:aegis:token-type:biometric-approval"
+}
